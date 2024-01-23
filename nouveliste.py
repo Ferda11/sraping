@@ -7,11 +7,10 @@ def scraper(url):
         response = requests.get(url)
         response.raise_for_status()  
         soup = BeautifulSoup(response.content, "html.parser")
-        articles = soup.find_all("article")
+        articles = soup.find("div",class_='lnv-featured-article')
 
         with open("data.csv", "w", newline="", encoding="utf-8") as csvfile:
             writer = csv.writer(csvfile)
-
             
             writer.writerow(["Titre", "Lien", "Image", "Description"])
 
